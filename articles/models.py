@@ -1,18 +1,19 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 
 
-class Topic(models.Model):
-    title = models.CharField(max_length=200)
-    parent = models.ForeignKey('self', blank=True, null=True)
-    children = models.ManyToManyField('self', blank=True, null=True)
+class Topic(MPTTModel):
+    title = models.TextField(max_length=200)
+    parent = TreeForeignKey(
+        'self', blank=True, null=True, related_name='children')
     articles = models.ManyToManyField('Article', blank=True, null=True)
     depth = False
 
     def rows(self):
         articles = self.articles.all()
-        return [articles[i:i + 3] for i in range(0, len(articles), 3)]
+        return [articles[i:i + 2] for i in range(0, len(articles), 2)]
 
     def __str__(self):
         return self.title

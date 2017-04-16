@@ -1,0 +1,9 @@
+{% extends 'articles/base.html' %}
+
+{% load markdown_filter %}
+
+{% block content %}
+<div class="container-fluid">
+  {% include 'articles/topic.html' %}
+</div>
+{% endblock %}

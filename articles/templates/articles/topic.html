@@ -1,0 +1,17 @@
+<div class="container-fluid topic">
+  <div class="row margin-b-2">
+    <div class="col-lg-12">
+      <h1> {{ root.title }} </h1>
+      <a href="/new/topic/{{ root.title }}" class="btn btn-default">New Topic</a>
+    </div>
+    <div class="col-lg-12">
+      {% for child in root.children.all %}
+      {% with "articles/topic.html" as filename %}  
+          {% include filename with root=child %}
+          {% endwith %}
+      {% empty %}
+        {% include 'articles/_article_list.html' with topic=child %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{% extends 'articles/base.html' %}
+
+{% block content %}
+          <div class="container-fluid">
+            <form method="POST" class="post-form">{% csrf_token %}
+              <div class="input-form">
+                <p>
+                  <h3> {{ form.title.label_tag }} </h3> What is the topic
+                </p>
+                <p>{{ form.title }}</p>
+              </div>
+              <div class="input-form">
+                <button type="submit" class="save btn btn-default">Save</button>
+              </div>
+            </form>
+          </div>
+{% endblock %}

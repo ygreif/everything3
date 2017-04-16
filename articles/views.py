@@ -42,6 +42,6 @@ def new_topic(request, topic):
             parent_topic.save()
             return redirect('/')
     else:
-        form = ArticleForm()
-    context = {'form': TopicForm()}
-    return render(request, 'topics/new_topic.html', context)
+        form = TopicForm()
+    context = {'form': form}
+    return render(request, 'articles/new_topic.html', context)

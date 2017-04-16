@@ -1,0 +1,35 @@
+{% extends 'articles/base.html' %}
+
+{% block content %}
+          <div class="container-fluid">
+            <form method="POST" class="post-form">{% csrf_token %}
+              <div class="input-form">
+                <p>
+                  <h3> {{ form.title.label_tag }} </h3> Describe the issue the article addresses
+                </p>
+                <p>{{ form.title }}</p>
+              </div>
+              <div class="input-form">
+                <p>
+                  <h3> {{ form.summary.label_tag }} </h3> The main point of the article.  Supports Markdown syntax
+                </p>
+                <p>{{ form.summary }}</p>
+              </div>
+              <div class="input-form">
+                <p>
+                  <h3> {{ form.link.label_tag }} </h3> The url
+                </p>
+                <p>{{ form.link }}</p>
+              </div>
+              <div class="input-form">
+                <p>
+                  <h3> {{ form.img.label_tag }} </h3> Thumbnail url
+                </p>
+                <p>{{ form.img }}</p>
+              </div>
+              <div class="input-form">
+                <button type="submit" class="save btn btn-default">Save</button>
+              </div>
+            </form>
+          </div>
+{% endblock %}
