@@ -7,8 +7,13 @@ from .forms import ArticleForm, TopicForm
 
 def index(request):
     topics = Topic.objects.all()
-    articles = Article.objects.all()
-    rows = [articles[i:i + 3] for i in range(0, len(articles), 3)]
+    if not topics:
+        t = Topic(title='everything!')
+        t.save()
+        topics = [t]
+#    articles = Article.objects.all()
+#    rows = [articles[i:i + 3] for i in range(0, len(articles), 3)]
+
     context = {'topics': topics, 'root': topics[0]}
     return render(request, 'articles/index.html', context)
 
