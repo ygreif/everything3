@@ -6,7 +6,7 @@ django-mptt==0.8.7
 gunicorn==19.6.0
 Markdown==2.6.8
 packaging==16.8
-psycopg2==2.7.1
+psycopg2==2.7.4
 pyparsing==2.2.0
 pytz==2017.2
 six==1.10.0
