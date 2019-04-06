@@ -1,0 +1,14 @@
+{% extends 'articles/base.html' %}
+
+{% load markdown_filter %}
+
+{% block content %}
+<div class="container-fluid">
+  <form method="GET" action="/search/" id="searchform">
+    <input class="searchfield" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search"/>
+    <input type="submit" value="search">
+  </form>
+  <hr>
+  {% include 'articles/_article_list.html' with rows=rows allow_new=False %}
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% load markdown_filter %}
 
 <div class="article-list">
-  {% for row in topic.rows %}
+  {% for row in rows %}
   <div class="row margin-b-2">
     {% for article in row %}
     <div class="col-lg-6">
@@ -13,9 +13,12 @@
     {% endfor %}
   </div>
   {% endfor %}
-  <div class="row margin-b-4">
-    <div class="col-lg-12">
-      <a href="/new/article/{{ topic.title }}" class="btn btn-primary">New Article</a>
+  {% if allow_new %}
+    <div class="row margin-b-4">
+      <div class="col-lg-12">
+        {{ title }}
+        <a href="/new/article/{{ title }}" class="btn btn-primary">New Article</a>
+      </div>
     </div>
-  </div>
+  {% endif %}
 </div>
