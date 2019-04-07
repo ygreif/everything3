@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "(e#9sv$#h!mehs-dj0zihm@f4#6%eb4q!&-un69g8i4!4&17mm"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("EVERYTHING_DEBUG", False)
+DEBUG = True  # os.environ.get("EVERYTHING_DEBUG", False)
 
 # Application definition
 
@@ -146,8 +146,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SLACK_TOKEN = 'xoxb-603809214647-593971599457-WexVXeU9dvHkH6k8WEK1RjlN'
 # override debug flag.  see https://django-slack.readthedocs.io/#slack-backend
 SLACK_BACKEND = 'django_slack.backends.UrllibBackend'
-if DEBUG:
-    SLACK_CHANNEL = 'test'
-else:
-    SLACK_CHANNEL = 'feed'
+SLACK_CHANNEL = 'feed'
 SLACK_USERNAME = 'courier-bot'
