@@ -1,0 +1,10 @@
+{% extends django_slack %}
+
+{% load django_slack %}
+
+{% block text %}
+*{{ article.title | escapeslack }}*
+{{ article.summary | escapeslack }}
+{{article.link}}
+{% endblock %}
+
