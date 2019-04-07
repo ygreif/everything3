@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'articles',
-    'mptt'
+    'mptt',
+    'django_slack',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,12 @@ STATICFILES_DIRS = [
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+SLACK_TOKEN = 'xoxb-603809214647-593971599457-WexVXeU9dvHkH6k8WEK1RjlN'
+# override debug flag.  see https://django-slack.readthedocs.io/#slack-backend
+SLACK_BACKEND = 'django_slack.backends.UrllibBackend'
+if DEBUG:
+    SLACK_CHANNEL = 'test'
+else:
+    SLACK_CHANNEL = 'feed'
+SLACK_USERNAME = 'courier-bot'

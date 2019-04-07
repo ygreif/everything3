@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django_slack import slack_message
 
 from .models import Article, Topic
 from .forms import ArticleForm, TopicForm
@@ -29,6 +30,7 @@ def new_article(request, topic):
             article.save()
             topic.articles.add(article)
             topic.save()
+            slack_message('articles/article.slack', {'article': article})
             return redirect('/')
     else:
         form = ArticleForm()
