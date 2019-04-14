@@ -48,7 +48,7 @@ def new_topic(request, topic):
             child_topic.save()
             parent_topic.children.add(child_topic)
             parent_topic.save()
-            return redirect('/')
+            return redirect('/#' + child_topic.title)
     else:
         form = TopicForm()
     context = {'form': form}
