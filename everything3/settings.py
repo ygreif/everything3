@@ -143,8 +143,12 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SLACK_TOKEN = 'xoxb-603809214647-593971599457-WexVXeU9dvHkH6k8WEK1RjlN'
+SLACK_TOKEN = os.environ.get('SLACK_TOKEN', False)
+SLACK_FAIL_SILENTLY = os.environ.get('SLACK_FAIL_SILENTLY', True)
 # override debug flag.  see https://django-slack.readthedocs.io/#slack-backend
-SLACK_BACKEND = 'django_slack.backends.UrllibBackend'
+if SLACK_TOKEN:
+    SLACK_BACKEND = 'django_slack.backends.UrllibBackend'
+else:
+    SLACK_BACKEND = 'django_slack.backends.DisabledBackend'
 SLACK_CHANNEL = 'feed'
-SLACK_USERNAME = 'courier-bot'
+SLACK_USERNAME = 'wire-service'

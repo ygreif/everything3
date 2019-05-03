@@ -24,7 +24,7 @@ class Article(models.Model):
     title = models.TextField(max_length=200)
     summary = models.TextField()
     link = models.URLField()
-    img = models.URLField()
+    img = models.URLField(blank=True)
 
     def __str__(self):
         return self.title
