@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container-fluid">
+  {% if stubs %} {% include 'articles/something.html' %} {% endif %}
   {% include 'articles/topic.html' %}
 </div>
 {% endblock %}

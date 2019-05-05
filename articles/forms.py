@@ -6,7 +6,7 @@ class ArticleForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ('title', 'summary', 'link', 'img')
+        fields = ('title', 'summary', 'link', 'img', 'parent_topic')
 
 
 class TopicForm(forms.ModelForm):

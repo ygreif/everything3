@@ -28,3 +28,13 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Stub(models.Model):
+    classified = models.BooleanField(default=False)
+    title = models.TextField(max_length=200)
+    link = models.TextField()
+    sender = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title

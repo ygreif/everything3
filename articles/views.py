@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django_slack import slack_message
+from django.http import HttpResponse
 
-from .models import Article, Topic
+from .models import Article, Topic, Stub
 from .forms import ArticleForm, TopicForm
-# Create your views here.
 
 
 def index(request):
@@ -13,18 +13,49 @@ def index(request):
         t = Topic(title='everything!')
         t.save()
         topics = [t]
-#    articles = Article.objects.all()
-#    rows = [articles[i:i + 3] for i in range(0, len(articles), 3)]
-
-    context = {'topics': topics, 'root': topics[0]}
+    stubs = Stub.objects.filter(classified=False)
+    context = {'topics': topics, 'root': topics[0], 'stubs': stubs}
     return render(request, 'articles/index.html', context)
 
 
-def new_article(request, topic):
+def new_something(request):
+    if request.method == 'POST':
+        sender = request.POST.get('sender')
+        subject = request.POST.get('subject', '').srip()
+        body_without_quotes = request.POST.get('stripped-text', '').strip()
+        print sender, subject, body_without_quotes
+        if not Stub.objects.filter(link=body_without_quotes):
+            stub = Stub(title=subject, link=body_without_quotes, sender=sender)
+            stub.save()
+    return HttpResponse('OK')
+
+
+def complete_stub(request, stub_id):
+    stub = Stub.objects.filter(id=stub_id)[0]
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            topic = Topic.objects.get(title=topic)
+            article = form.save(commit=False)
+            article.save()
+            topic = article.parent_topic
+            topic.articles.add(article)
+            topic.save()
+            slack_message('articles/article.slack', {'article': article})
+            stub.classified = True
+            stub.save()
+            return redirect('/')
+    else:
+        form = ArticleForm(initial={'title': stub.title, 'link': stub.link})
+    context = {'form': form}
+    return render(request, 'articles/new_article.html', context)
+
+
+def new_article(request, topic):
+    print topic
+    topic = Topic.objects.get(title=topic)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
             article = form.save(commit=False)
             article.parent_topic = topic
             article.save()
@@ -34,7 +65,8 @@ def new_article(request, topic):
             return redirect('/')
     else:
         form = ArticleForm()
-    context = {'form': ArticleForm()}
+    context = {'form': ArticleForm(initial={'parent_topic': topic})}
+    print context, topic, type(topic), "boo"
     return render(request, 'articles/new_article.html', context)
 
 
