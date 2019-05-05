@@ -1,0 +1,18 @@
+<div class="container-fluid topic">
+  <div class="row margin-b-2">
+    <div class="col-lg-12">
+      <h1 id="something"> something </h1>
+    </div>
+    <div class="col-lg-12">
+      {% for stub in stubs %}
+      <div class="row margin-b-2">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-11">
+          <h2> {{ stub.title }}</h2> <p> {{ stub.link }} <a href="/edit/stub/{{ stub.id }}" class="btn btn-default">Complete</a> </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
