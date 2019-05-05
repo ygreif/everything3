@@ -23,7 +23,6 @@ def new_something(request):
         sender = request.POST.get('sender')
         subject = request.POST.get('subject', '').srip()
         body_without_quotes = request.POST.get('stripped-text', '').strip()
-        print sender, subject, body_without_quotes
         if not Stub.objects.filter(link=body_without_quotes):
             stub = Stub(title=subject, link=body_without_quotes, sender=sender)
             stub.save()
@@ -51,7 +50,6 @@ def complete_stub(request, stub_id):
 
 
 def new_article(request, topic):
-    print topic
     topic = Topic.objects.get(title=topic)
     if request.method == 'POST':
         form = ArticleForm(request.POST)
@@ -66,7 +64,6 @@ def new_article(request, topic):
     else:
         form = ArticleForm()
     context = {'form': ArticleForm(initial={'parent_topic': topic})}
-    print context, topic, type(topic), "boo"
     return render(request, 'articles/new_article.html', context)
 
 

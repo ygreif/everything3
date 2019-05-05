@@ -3,8 +3,6 @@ import markdown
 
 register = template.Library()
 
-print "hi"
-
 
 @register.filter
 def markdownify(text):
