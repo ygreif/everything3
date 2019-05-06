@@ -9,6 +9,7 @@ from .forms import ArticleForm, TopicForm
 
 
 def index(request):
+    print "Index request"
     topics = Topic.objects.all()
     if not topics:
         t = Topic(title='everything!')
@@ -21,6 +22,7 @@ def index(request):
 
 @csrf_exempt
 def new_something(request):
+    print "New something request", request
     if request.method == 'POST':
         sender = request.POST.get('sender')
         subject = request.POST.get('subject', '').strip()
@@ -28,7 +30,6 @@ def new_something(request):
         stub = Stub.objects.filter(link=body_without_quotes)
         if not stub:
             stub = Stub(title=subject, link=body_without_quotes, sender=sender)
-            print stub
             stub.save()
     return HttpResponse('OK')
 
