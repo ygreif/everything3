@@ -37,4 +37,4 @@ class Stub(models.Model):
     sender = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.title
+        return ' - '.join([self.title, self.link, self.sender])

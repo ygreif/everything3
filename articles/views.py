@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django_slack import slack_message
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Article, Topic, Stub
 from .forms import ArticleForm, TopicForm
@@ -18,13 +19,16 @@ def index(request):
     return render(request, 'articles/index.html', context)
 
 
+@csrf_exempt
 def new_something(request):
     if request.method == 'POST':
         sender = request.POST.get('sender')
-        subject = request.POST.get('subject', '').srip()
+        subject = request.POST.get('subject', '').strip()
         body_without_quotes = request.POST.get('stripped-text', '').strip()
-        if not Stub.objects.filter(link=body_without_quotes):
+        stub = Stub.objects.filter(link=body_without_quotes)
+        if not stub:
             stub = Stub(title=subject, link=body_without_quotes, sender=sender)
+            print stub
             stub.save()
     return HttpResponse('OK')
 
