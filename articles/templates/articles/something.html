@@ -9,7 +9,7 @@
         <div class="col-lg-1">
         </div>
         <div class="col-lg-11">
-          <h2> {{ stub.title }}</h2> <p> {{ stub.link }} <a href="/edit/stub/{{ stub.id }}" class="btn btn-default">Complete</a> </p>
+          <h2> {{ stub.title }}</h2> <p> <a href="{{ stub.link }}"> {{ stub.link }} </a> <a href="/edit/stub/{{ stub.id }}" class="btn btn-default">Complete</a> </p>
         </div>
       </div>
       {% endfor %}
