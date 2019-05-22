@@ -71,12 +71,8 @@
            }
           </style>
            <script type="text/javascript">
-           console.log('ready?');
            $(document).ready(function() {
-             console.log('ready!');
-
              $('.toggle').click(function() {
-               console.log('toggle me');
                let that = this;
                $(this).parent().children('.toggle-content').toggle(100, function() {
                  var visible = $(this).is(':visible');
