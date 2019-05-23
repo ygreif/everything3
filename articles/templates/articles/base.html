@@ -13,21 +13,22 @@
 		<meta name="robots" content="index, follow">
 
 		<!-- icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 		<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 		<link rel="shortcut icon" href="{% static 'articles/favicon.ico' %}">
-                <link href="https://fonts.googleapis.com/css?family=Montserrat:800" rel="stylesheet">
-                <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
 
-                
+    
 		<!-- Bootstrap Core CSS file -->
-                <link rel="stylesheet" type="text/css" href="{% static 'articles/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'articles/css/bootstrap.min.css' %}" />
 
 		<!-- Override CSS file - add your own CSS rules -->
-                <link rel="stylesheet" type="text/css" href="{% static 'articles/css/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'articles/css/styles.css' %}" />
 		<!-- Conditional comment containing JS files for IE6 - 8 -->
 		<!--[if lt IE 9]>
-                    <script src="{% static 'articles/js/html5.js' %}" />
-                    <script src="{% static 'articles/js/respond.min.js.js' %}" />
+    <script src="{% static 'articles/js/html5.js' %}" />
+    <script src="{% static 'articles/js/respond.min.js.js' %}" />
 		<![endif]-->
 	</head>
 
@@ -35,7 +36,57 @@
           {% block content %}
           {% endblock %}
           <!-- scripts -->
-          <script src="{% static 'articles/js/jquery-1.11.2.min.js' %}" />
-          <script src="{% static 'articles/js/bootstrap.min.js' %}" />
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+          <script src="{% static 'articles/js/bootstrap.min.js' %}"></script>
+
+          <style type="text/css">
+           .toggle-wrapper {
+             border-left: 2px solid #eee;
+             padding-left: 20px;
+           }
+           .toggle-wrapper:hover {
+             border-left: 2px solid #ccc;
+           }
+
+           .toggle-icon {
+             font-size: 18px;
+             margin-right: 10px;
+           }
+
+           .toggle {
+             display: flex;
+             align-items: center;
+             cursor: pointer;
+             padding-left: 10px;
+             margin-bottom: 10px;
+           }
+
+           .toggle:hover {
+             background: #f9f9f9;
+           }
+
+           .title {
+             font-size: 24px;
+             font-weight: bold;
+           }
+          </style>
+           <script type="text/javascript">
+           $(document).ready(function() {
+             $('.toggle').click(function() {
+               let that = this;
+               $(this).parent().children('.toggle-content').toggle(100, function() {
+                 var visible = $(this).is(':visible');
+                 if (visible) {
+                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-down"></i>');
+                 } else {
+                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-right"></i>');
+                 }
+               });
+             });
+           });
+           
+          </script>
+
+
         </body>
 </html>
