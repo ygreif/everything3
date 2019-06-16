@@ -7,7 +7,7 @@
     <div class="col-lg-6">
       <p><h2><a href='{{ article.link }}' target='_blank'> {{ article.title }}</a></h2></p>
       <div class="md-content">
-        <p><h4>{{ article.summary|markdownify|safe}}</h4></p>
+        <p><h4>{{ article.summary|markdownify|safe|truncatewords_html:50}}</h4></p>
       </div>
     </div>
     {% endfor %}

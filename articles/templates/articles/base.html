@@ -72,19 +72,24 @@
           </style>
            <script type="text/javascript">
            $(document).ready(function() {
-             $('.toggle').click(function() {
-               let that = this;
-               $(this).parent().children('.toggle-content').toggle(100, function() {
-                 var visible = $(this).is(':visible');
-                 if (visible) {
-                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-down"></i>');
-                 } else {
-                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-right"></i>');
-                 }
-               });
-             });
+             $('.toggle').click(function() { toggle(this) });
+             toggle($('#something-content'));
+             {% for child in root.children.all %}
+               toggle($('#{{child.id}}'));
+             {% endfor %}
            });
-           
+
+           function toggle(el) {
+             let that = el;
+             $(el).parent().children('.toggle-content').toggle(100, function() {
+               var visible = $(el).is(':visible');
+               if (visible) {
+                 $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-down"></i>');
+               } else {
+                 $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-right"></i>');
+               }
+             }
+           );}
           </script>
 
 
