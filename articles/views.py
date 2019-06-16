@@ -15,7 +15,10 @@ def index(request):
         t.save()
         topics = [t]
     stubs = Stub.objects.filter(classified=False)
-    context = {'topics': topics, 'root': topics[0], 'stubs': stubs}
+    recent = Article.objects.order_by('-id')
+    recent = [list(recent[0:3]), list(recent[3:6])]
+    context = {'topics': topics, 'root': topics[0], 'stubs': stubs,
+               'recent': recent}
     return render(request, 'articles/index.html', context)
 
 
