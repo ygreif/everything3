@@ -73,6 +73,12 @@ def new_article(request, topic):
     return render(request, 'articles/new_article.html', context)
 
 
+def view_article(request, article_id):
+    article = Article.objects.filter(id=article_id)[0]
+    context = {'article': article}
+    return render(request, 'articles/article.html', context)
+
+
 def new_topic(request, topic):
     if request.method == 'POST':
         form = TopicForm(request.POST)

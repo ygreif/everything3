@@ -1,0 +1,14 @@
+{% extends 'articles/base.html' %}
+{% load markdown_filter %}
+{% block content %}
+<div class="container-fluid">
+  <p>
+    <h1> {{ article.title }} </h1>
+  </p>
+  <img src="{{ article.img }}">
+  <p>
+    {{ article.summary|markdownify|safe }}
+  </p>
+  <p><a href='{{ article.link }}' target='_blank'> link </a></p>
+</div>
+{% endblock %}
