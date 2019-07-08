@@ -23,7 +23,7 @@ class Article(models.Model):
     parent_topic = models.ForeignKey(Topic)
     title = models.TextField(max_length=200)
     summary = models.TextField()
-    link = models.URLField()
+    link = models.URLField(blank=True)
     img = models.URLField(blank=True)
 
     def __str__(self):

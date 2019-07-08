@@ -5,6 +5,7 @@
 {% block text %}
 *{{ article.title | escapeslack }}*
 {{ article.summary | escapeslack }}
+filed under {{ article.topic.title }}
 {{article.link}}
 {% endblock %}
 
