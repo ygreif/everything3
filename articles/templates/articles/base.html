@@ -72,6 +72,14 @@
           </style>
            <script type="text/javascript">
            $(document).ready(function() {
+             // TODO: fix the UI so it displays server errors
+             $('#submitArticle').submit(function(e) {
+               if ($('#id_parent_topic option[selected]').val() == '1') {
+                 alert("Set a topic please");
+                 e.preventDefault();
+               }
+             });
+
              $('.toggle').click(function() {
                let that = this;
                $(this).parent().children('.toggle-content').toggle(100, function() {
@@ -87,6 +95,9 @@
            
           </script>
 
+
+          <script type="text/javascript">
+          </script>
 
         </body>
 </html>
