@@ -2,7 +2,7 @@
 
 {% block content %}
           <div class="container-fluid">
-            <form method="POST" class="post-form">{% csrf_token %}
+            <form method="POST" class="post-form" id="submitArticle">{% csrf_token %}
               <div class="input-form">
                 <p>
                   <h3> {{ form.title.label_tag }} </h3> Describe the issue the article addresses
