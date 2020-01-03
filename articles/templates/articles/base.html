@@ -85,6 +85,18 @@
                  e.preventDefault();
                }
              });
+
+             $('.toggle').click(function() {
+               let that = this;
+               $(this).parent().children('.toggle-content').toggle(100, function() {
+                 var visible = $(this).is(':visible');
+                 if (visible) {
+                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-down"></i>');
+                 } else {
+                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-right"></i>');
+                 }
+               });
+             });
            });
 
            function toggle(el) {
