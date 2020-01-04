@@ -77,6 +77,26 @@
              {% for child in root.children.all %}
                toggle($('#{{child.id}}'));
              {% endfor %}
+
+             // TODO: fix the UI so it displays server errors
+             $('#submitArticle').submit(function(e) {
+               if ($('#id_parent_topic option[selected]').val() == '1') {
+                 alert("Set a topic please");
+                 e.preventDefault();
+               }
+             });
+
+             $('.toggle').click(function() {
+               let that = this;
+               $(this).parent().children('.toggle-content').toggle(100, function() {
+                 var visible = $(this).is(':visible');
+                 if (visible) {
+                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-down"></i>');
+                 } else {
+                   $(that).children('.toggle-icon').html('<i class="fas fa-caret-square-right"></i>');
+                 }
+               });
+             });
            });
 
            function toggle(el) {
@@ -92,6 +112,9 @@
            );}
           </script>
 
+
+          <script type="text/javascript">
+          </script>
 
         </body>
 </html>
