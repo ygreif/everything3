@@ -18,6 +18,10 @@ class Topic(MPTTModel):
     def __str__(self):
         return self.title
 
+    @property
+    def allow_new(self):
+        return 'everything!' not in self.title
+
 
 class Article(models.Model):
     parent_topic = models.ForeignKey(Topic)
@@ -28,6 +32,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def is_spam(self):
+        return not self.parent_topic.allow_new
 
 
 class Stub(models.Model):
