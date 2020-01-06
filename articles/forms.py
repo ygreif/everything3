@@ -11,6 +11,7 @@ class ArticleForm(forms.ModelForm):
         if self.cleaned_data['parent_topic'].title == 'everything!':
             # TODO: fix the UI so it displays these errors
             raise forms.ValidationError('Please set a parent topic')
+        return self.cleaned_data['parent_topic']
 
 
 class TopicForm(forms.ModelForm):
