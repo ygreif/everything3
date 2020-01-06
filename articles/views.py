@@ -41,6 +41,7 @@ def complete_stub(request, stub_id):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save(commit=False)
+            hack_block_spam(article)
             article.save()
             topic = article.parent_topic
             topic.articles.add(article)
@@ -62,6 +63,7 @@ def new_article(request, topic):
         if form.is_valid():
             article = form.save(commit=False)
             article.parent_topic = topic
+            hack_block_spam(article)
             article.save()
             topic.articles.add(article)
             topic.save()
@@ -111,3 +113,8 @@ def search(request):
     else:
         rows = []
     return render(request, 'articles/search.html', {'rows': rows})
+
+
+def hack_block_spam(article):
+    if article.is_spam():
+        raise Exception('probably spam')

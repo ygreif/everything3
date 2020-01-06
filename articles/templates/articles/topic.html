@@ -10,7 +10,7 @@
           <a href="/new/topic/{{ root.title }}" class="btn btn-default">New Topic</a>
         </div>
         <div class="col-lg-12">
-          {% include 'articles/_article_list.html' with rows=child.rows allow_new=True title=root.title %}
+          {% include 'articles/_article_list.html' with rows=child.rows allow_new=root.allow_new title=root.title %}
           {% for child in root.children.all %}
             {% with "articles/topic.html" as filename %}
               {% include filename with root=child %}
