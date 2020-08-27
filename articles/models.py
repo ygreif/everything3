@@ -20,7 +20,7 @@ class Topic(MPTTModel):
 
     @property
     def allow_new(self):
-        return 'everything!' not in self.title
+        return 'everything!' not in self.title and 'Corporate ETR' not in self.title
 
 
 class Article(models.Model):
