@@ -22,6 +22,13 @@ class Topic(MPTTModel):
     def allow_new(self):
         return 'everything!' not in self.title and 'Corporate ETR' not in self.title
 
+    @property
+    def channel(self):
+        if 'covid' in self.title.lower() or 'coronavirus' in self.title.lower():
+            return 'coronavirus'
+        else:
+            return 'feed'
+
 
 class Article(models.Model):
     parent_topic = models.ForeignKey(Topic)
