@@ -10,19 +10,17 @@ from django.core.management import BaseCommand
 from django.db.models.deletion import ProtectedError
 from django.db.utils import IntegrityError
 
-from articles.models import Articl
+from articles.models import Article
 from django_slack import slack_message
 
 pp = pprint.PrettyPrinter()
 
 
 class Command(BaseCommand):
-    articles = Article.objects.all()
     def add_arguments(self, parser):
         pass
 
     def handle(self, *args, **options):
         articles = Article.objects.all()
-        article = random.choice(article)
+        article = random.choice(articles)
         slack_message('articles/throwback.slack', {'article': article})
-
