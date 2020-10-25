@@ -104,6 +104,11 @@
 
 
           <script type="text/javascript">
+           $(document).ready(function() {
+             var a = Math.round(Math.random() * 5);
+             var b = Math.round(Math.random() * 5);
+             $('#id_captcha').val(a + '+' + b + '=');
+           });
           </script>
 
         </body>
