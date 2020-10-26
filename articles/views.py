@@ -57,7 +57,8 @@ def complete_stub(request, stub_id):
 
 
 def new_article(request, topic):
-    topic = Topic.objects.get(title=topic)
+    return
+    topic = Topic.objects.filter(title=topic).first()
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
