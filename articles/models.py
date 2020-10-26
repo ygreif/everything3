@@ -29,7 +29,6 @@ class Topic(MPTTModel):
         else:
             return 'feed'
 
-
 class Article(models.Model):
     parent_topic = models.ForeignKey(Topic)
     title = models.TextField(max_length=200)
