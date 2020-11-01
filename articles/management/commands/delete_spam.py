@@ -27,9 +27,12 @@ class Command(BaseCommand):
 
         articles = Article.objects.all().filter(
             title__contains=r)
+        print "Selecting", len(articles), len(Article.objects.all())
         if not execute:
             for a in articles:
-                print a
+                try:
+                    print a
+                except:
+                    print "Can't display"
         else:
-            print "Deleting", len(articles)
             articles.delete()
