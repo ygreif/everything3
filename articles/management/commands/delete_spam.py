@@ -16,7 +16,20 @@ pp = pprint.PrettyPrinter()
 
 class Command(BaseCommand):
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--execute', action='store_true')
+        parser.add_argument('--r', type=str)
+
     def handle(self, *args, **options):
-        today = datetime.datetime.today().strftime('%Y-%m-%d')
+        execute = options.get('execute')
+        r = options.get('r')
+
         articles = Article.objects.all().filter(
-            link__contains='youtu.be').delete()
+            title__contains=r)
+        if not execute:
+            for a in articles:
+                print a
+        else:
+            print "Deleting", len(articles)
+            articles.delete()
