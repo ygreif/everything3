@@ -31,3 +31,10 @@ class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
         fields = ('title',)
+
+    def clean_title(self):
+        val = self.cleaned_data['title']
+        # If it has http in the title, it's probably spam
+        if 'http://' in val or 'https://' in val:
+            raise forms.ValidationError('spam')
+        return val
