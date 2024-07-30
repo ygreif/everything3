@@ -3,10 +3,11 @@
 {% load django_slack %}
 {% block channel %} {{ article.parent_topic.channel }} {% endblock %}
 {% block text %}
+{% if is_throwback %}*Throwback Thursday* :clock1:{% endif %}
+
 *{{ article.title | escapeslack }}*
 {{ article.summary | escapeslack }}
 
 - filed under *{{ article.parent_topic.title }}*
 {{article.link}}
 {% endblock %}
-

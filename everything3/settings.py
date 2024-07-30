@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'articles',
     'mptt',
     'django_slack',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,7 @@ else:
     SLACK_BACKEND = 'django_slack.backends.DisabledBackend'
 SLACK_CHANNEL = 'feed'
 SLACK_USERNAME = 'wire-service'
+
+CRONJOBS = [
+    ('0 10 * * *', 'django.core.management.call_command', ['send_throwback'])
+]
