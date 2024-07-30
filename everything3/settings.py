@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+#    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -141,7 +141,9 @@ STATICFILES_DIRS = [
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+#WHITENOISE_MANIFEST_STRICT = False
 
 SLACK_TOKEN = os.environ.get('SLACK_TOKEN', False)
 SLACK_FAIL_SILENTLY = os.environ.get('SLACK_FAIL_SILENTLY', True)

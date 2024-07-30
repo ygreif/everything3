@@ -7,7 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class Topic(MPTTModel):
     title = models.TextField(max_length=200)
     parent = TreeForeignKey(
-        'self', blank=True, null=True, related_name='children')
+        'self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     articles = models.ManyToManyField('Article', blank=True, null=True)
     depth = False
 
@@ -30,7 +30,7 @@ class Topic(MPTTModel):
             return 'feed'
 
 class Article(models.Model):
-    parent_topic = models.ForeignKey(Topic)
+    parent_topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     title = models.TextField(max_length=200)
     summary = models.TextField()
     link = models.URLField(blank=True)

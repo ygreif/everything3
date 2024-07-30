@@ -1,13 +1,13 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^edit/stub/(.*)/$', views.complete_stub),
-    url(r'^new/something/$', views.new_something),
-    url(r'^new/article/(.*)/$', views.new_article),
-    url(r'^view/article/(.*)/$', views.view_article),
-    url(r'^new/topic/(.*)/$', views.new_topic),
-    url(r'^search/$', views.search),
+    re_path(r'^$', views.index, name='index'),
+    re_path(r'^edit/stub/(.*)/$', views.complete_stub),
+    re_path(r'^new/something/$', views.new_something),
+    re_path(r'^new/article/(.*)/$', views.new_article),
+    re_path(r'^view/article/(.*)/$', views.view_article),
+    re_path(r'^new/topic/(.*)/$', views.new_topic),
+    re_path(r'^search/$', views.search),
 ]
